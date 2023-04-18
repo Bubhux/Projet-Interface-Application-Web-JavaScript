@@ -23,8 +23,8 @@
 
 ## Liste pré-requis   
 Interface élaborée avec les logiciels suivants:   
--Python v3.7.2 choisissez la version adaptée a votre ordinateur et système. Python est disponible à l'adresse suivante   
-  https://www.python.org/downloads/   
+-Python v3.7.2 choisissez la version adaptée a votre ordinateur et système. Python est disponible à l'adresse   
+ suivante https://www.python.org/downloads/   
 -API "OCMovies-API"   
 -Sublime Text 3.2.2 build 3211   
 -Nodejs V12.18.1   
@@ -62,7 +62,7 @@ deactivate
 
 ## Télégarchement et installation de L'API   
 -L'installation et des informations sur le fonctionnement de l'API se trouvent à l'adresse suivante   
-https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR   
+ https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR   
 
 ## Lancement de l'API   
 -Pour exécuter l'API activer l'environnement virtuel.   
@@ -79,7 +79,7 @@ python manage.py runserver
 -main.js   
     Contient tout le code javascript. Il est appelé dans le fichier index.html avec la commande suivante :   
     ```python
-    <script src="js/main.js" async></script>
+    <script src="js/main.js" async></script>   
     ```
     Ce fichier contient tous les processus de traitement des événements et toute la gestion des données.   
 
