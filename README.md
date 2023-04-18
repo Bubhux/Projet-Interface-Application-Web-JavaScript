@@ -24,7 +24,7 @@
 ## Liste pré-requis   
 Interface élaborée avec les logiciels suivants:   
 -Python v3.7.2 choisissez la version adaptée a votre ordinateur et système. Python est disponible à l'adresse   
-       suivante https://www.python.org/downloads/   
+ suivante https://www.python.org/downloads/   
 -API "OCMovies-API"   
 -Sublime Text 3.2.2 build 3211   
 -Nodejs V12.18.1   
