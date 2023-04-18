@@ -80,7 +80,7 @@ python manage.py runserver
     Contient tout le code javascript. Il est appelé dans le fichier index.html avec la commande suivante :   
     ```python
     <script src="js/main.js" async></script>   
-    ```
+    ```   
     Ce fichier contient tous les processus de traitement des événements et toute la gestion des données.   
 
 -index.html   
