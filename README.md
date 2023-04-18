@@ -24,7 +24,7 @@
 ## Liste pré-requis   
 Interface élaborée avec les logiciels suivants:   
 -Python v3.7.2 choisissez la version adaptée a votre ordinateur et système. Python est disponible à l'adresse   
-  suivante https://www.python.org/downloads/   
+       suivante https://www.python.org/downloads/   
 -API "OCMovies-API"   
 -Sublime Text 3.2.2 build 3211   
 -Nodejs V12.18.1   
@@ -58,7 +58,7 @@ env\Scripts\activate.bat
 - **Pour désactiver l'environnement virtuel, il suffit de taper dans votre terminal:**   
 ```bash  
 deactivate
-```
+```   
 
 ## Télégarchement et installation de L'API   
 -L'installation et des informations sur le fonctionnement de l'API se trouvent à l'adresse suivante   
@@ -70,7 +70,7 @@ deactivate
 **-Taper dans votre terminal la commande:**   
 ```bash
 python manage.py runserver
-```
+```   
 
 ## Lancement de 'linterface web   
 -Pour lancer le l'interface web ouvrir le fichier index.html dans le navigateur de votre choix.   
