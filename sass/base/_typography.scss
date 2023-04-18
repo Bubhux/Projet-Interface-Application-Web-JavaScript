@@ -1,0 +1,30 @@
+
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Medium.ttf') format('truetype');
+}
+
+
+body {
+    font-family: 'Roboto';
+    font-weight: 150;
+    font-style: normal;
+    //color: #f6eeee;
+    //background-color: #2a2a2a;
+}
+
+h1 {
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-style: normal;
+    //color:  rgb(184, 34, 34);
+    font-size: 2em;
+    color: white;
+    text-shadow: 5px 5px 2px rgb(0, 0, 0)
+}

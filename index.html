@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/main.js" async></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site web | JustStreamIt</title>
+</head>
+<body>
+    <div id=body__blockPage>
+        <header>
+            <div class=header__logo><img src="images/logo_dark_resize.png" alt="image logo"></div>
+                <nav class="nav">
+                    <h1>Bienvenue sur JustStreamIt</h1>
+                    <ul id=header__navigation>
+                    </ul>
+
+                    <ul class="nav__navigation">
+                        <li class="nav__navigation__link nav__navigation__link--active">Acceuil</li>
+                        <li class="nav__navigation__link"> <a href="">Films</a></li>
+                        <li class="nav__navigation__link"> <a href="#message">Contact</a></li>
+                    </ul>
+                </nav>
+        </header>
+    
+        <div class="banner">
+            <section id=bestFilm>
+              <h1>Meilleur Film</h1>
+                <div id=bestFilm__image></div>
+                    <div id=bestFilm__info>
+                        <div class=title id=bestFilm__title></div>
+                        <button id="bestFilm__buttonInfo">Informations</button>
+                        <h2>Résumé</h2>
+                        <p id=bestFilm__description></p>
+                    </div>
+            </section>
+        </div>
+    
+        <main class="conatainer">
+            <div id="infoModal" class="modal">
+                <div class="modal__modalContent">
+                    <span class="modalContent__close"></span>
+                    <div id=headerModal>
+                        <span id=headerModal__originalTitle></span>
+                        <span id=headerModal__filmImage></span>
+                    </div>
+                    <div id=infoModalText>
+                        <div class=modal__infoModalText__info>
+                            <span class=modal__infoModalText__titleInfo>Genres:</span>
+                            <span class=modal__infoModalText__infoText id=infoModalText__genres></span>
+                        </div>  
+                        <div class=modal__infoModalText__info>
+                            <span class=modal__infoModalText__titleInfo>Date de sortie:</span>
+                            <span class=modal__infoModalText__infoText id=infoModalText__datePublished></span>
+                        </div>  
+                        <div class=modal__infoModalText__info>
+                            <span class=modal__infoModalText__titleInfo>Classification:</span>
+                            <span class=modal__infoModalText__infoText id=infoModalText__rated></span>
+                        </div>  
+                        <div class=modal__infoModalText__info>
+                            <span class=modal__infoModalText__titleInfo>Score IMDB:</span>
+                            <span class=modal__infoModalText__infoText id=infoModalText__imdbScore></span>
+                        </div> 
+                        <div class=modal__infoModalText__info>
+                            <span class=modal__infoModalText__titleInfo>Réalisateur:</span>
+                            <span class=modal__infoModalText__infoText id=infoModalText__directors></span>
+                        </div> 
+                        <div class=modal__infoModalText__info>
+                            <span class=modal__infoModalText__titleInfo>Acteurs:</span>
+                            <span class=modal__infoModalText__infoText id=infoModalText__actors></span>
+                        </div> 
+                        <div class=modal__infoModalText__info>
+                            <span class=modal__infoModalText__titleInfo >Durée:</span>
+                            <span class=modal__infoModalText__infoText id=infoModalText__duration></span>
+                        </div> 
+                        <div class=modal__infoModalText__info>
+                            <span class=modal__infoModalText__titleInfo>Pays:</span>
+                            <span class=modal__infoModalText__infoText id=infoModalText__countries></span>
+                        </div> 
+                        <div class=modal__infoModalText__info>
+                            <span class=modal__infoModalText__titleInfo>Box Office</span>
+                            <span class=modal__infoModalText__infoText id=infoModalText__worldwideGrossIncome></span>
+                        </div> 
+                        <div class=modal__infoModalText__info>
+                            <span class=modal__infoModalText__titleInfo>Résumé:</span>
+                            <span class=modal__infoModalText__infoText id=infoModalText__longDescription></span>
+                        </div>
+                    </div>
+                </div>
+           </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="footer__tweets">
+            <h2>Nos derniers tweets</h2>
+            <p id="message__1">Venez voir les meilleurs films !</p>
+            <p id="message__2">le 1er janvier à 00h00 !</p>
+            <p>Pour plus d'informations : <br>
+            <a id="message" class="footer__message" href="mailto:bubhuxpaindepice@gmail.com" title="bubhuxpaindepice@gmail.com">Envoyer-moi un e-mail !</a></p>
+        </div>
+
+        <div class="footer__images">
+            <h2>Retrouvez nous sur les réseaux</h2>
+            <p><img src="images/facebook.png" alt="Image logo"><img src="images/instagram.png" alt="Image logo"><img src="images/whatsapp.png" alt="Image logo"><img src="images/twitter.png" alt="Image logo"><img src="images/imdb.png" alt="Image logo"> </p>
+        </div>
+
+        <div class="footer__subscribers">
+            <h2>Nos abonnés</h2>
+            <div class="footer__list__subscribers">
+                <ul>
+                    <li><a href="#">Macaron le hérisson</a></li>
+                    <li><a href="#">Crepe au fromage</a></li>
+                    <li><a href="#">Bender</a></li>
+                    <li><a href="#">Bob l'éponge</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">Baba la crevette</a></li>
+                    <li><a href="#">Blackpearl</a></li>
+                    <li><a href="#">Ton ami le panda</a></li>
+                    <li><a href="#">Cracotte la marmotte</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

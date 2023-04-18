@@ -1,0 +1,30 @@
+
+
+@mixin heading-shadow($colour:lightness-shift($colour-primary), $offset: $heading-shadow-size){
+    text-shadow: $offset $offset $colour;
+}
+
+@mixin border($colour:$colour-secondary) {
+    border: .1rem solid $colour;
+}
+
+@mixin border-radius($border:$border-radius) {
+    border-radius: 20px $border;
+}
+
+@mixin box-shadow($box:$box-shadow) {
+    //box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+@mixin display {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; 
+}
+
+@mixin mobile-only {
+    @media screen and (max-width: map-get($breakpoints, mobile)) {
+        @content;
+    }
+}

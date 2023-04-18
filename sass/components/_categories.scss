@@ -1,0 +1,38 @@
+
+
+/* Categories */
+.category {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;  
+    -webkit-box-orient: vertical;  
+    -webkit-box-direction: normal;  
+    -ms-flex-direction: column;  
+    flex-direction: column;
+    -webkit-box-align:center;
+    -ms-flex-align:center;
+    align-items:center; 
+    //background-color: rgb(85, 75, 75);
+    //border-radius: 50px;
+    margin-top: 0.3em;
+    
+    &__category h1 {
+       margin-top: 1px;
+       margin-bottom: 30px;
+       //border-top-style: solid;
+       //border-top-width: 0px
+    }
+
+    /*.list:hover {
+        transform: translate3d(0, -10px, 0);
+    }*/
+}
+
+    /*.category h1 {
+       margin-top: 1px;
+       margin-bottom: 30px;
+    }*/
+
+    /*.list:hover {
+        transform: translate3d(0, -10px, 0);
+    }*/

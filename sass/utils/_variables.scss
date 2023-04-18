@@ -1,0 +1,25 @@
+
+
+$colour-primary: #8f8686;
+$colour-secondary: #666d70;
+
+$colour-accent: #D6FFF5;
+$colour-white: #fff;
+$colour-invalid: #DB464B;
+
+$heading-shadow-size: .10rem;
+$layout-margin: 6rem;
+$grid-gutter: $layout-margin * .25;
+
+$border-radius: 20px;
+
+//$box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+$box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+$breakpoints: (
+    mobile: 600px
+);
+
+//$display: -webkit-box;
+//$display: -ms-flexbox;
+//$display: flex;  

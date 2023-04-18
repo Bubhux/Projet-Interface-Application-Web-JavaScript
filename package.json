@@ -1,0 +1,13 @@
+{
+  "name": "projet-site-juststreamit",
+  "version": "1.0.0",
+  "description": "1. **Informations general**   \r 2. **Liste pré-requis**   \r 3. **Création environnement virutel**   \r 4. **Activation environnement virutel**   \r 5. **Télégarchement et installation de l'API**   \r 6. **Lancement de l'API**   \r 7. **Lancement de l'interface web**   \r 9. **Informations importantes sur les différents fichiers et dossiers**   \r 7. **Développement**   \r 8. **Auteurs et contact**",
+  "main": "./js/main.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.css",
+    "prefix": "postcss ./css/style.css --use autoprefixer -d ./css/prefixed/"
+  },
+  "author": "",
+  "license": "ISC",
+  "browserslist": "last 4 versions"
+}
