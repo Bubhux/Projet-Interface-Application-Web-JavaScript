@@ -85,7 +85,7 @@ python manage.py runserver
 
 -index.html   
     Ce fichier contient le code html de base et toutes les relations de lien nécessaires pour permettre au code de s'exécuter correctement.   
-    s'exécuter correctement. Tout comme la commande précédente, il appelle également des fichiers CSS et d'autres liens   Javascript.  
+    s'exécuter correctement. Tout comme la commande précédente, il appelle également des fichiers CSS et d'autres liens Javascript.   
     ```W3C``` renvoie : Document checking completed. No errors or warnings to show.   
 
 -styles.css   
