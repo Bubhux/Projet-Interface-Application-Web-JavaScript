@@ -1,16 +1,13 @@
 
-
 .category {
     display: flex;
     flex-direction: column;
     text-align: center;
     margin-bottom: 15px;
     padding-bottom: 10px;
-    //background-color: #292424;
     opacity: 0.8;
     font-size: 1em;
     @include border-radius($border-radius);
-    //@include border($colour-primary);
     @include box-shadow($box-shadow);
     @include heading-shadow($colour-white);
     

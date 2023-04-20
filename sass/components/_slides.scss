@@ -1,14 +1,13 @@
 
-
-/* Slides */
 .list {
-    //display: -webkit-box;
-    //display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
     margin-bottom: 30px;
+    @include mobile-only {
+            margin-top: 0px;
+    }
 
     .category__prev, .category__next {
         cursor: pointer;
@@ -27,12 +26,10 @@
     }
 
     .category__prev {
-        //left: 30px;
         margin-right: 5px;
     }
 
     .category__next {
-        //right: 5px;
         margin-left: -15px;
     }
     
@@ -60,9 +57,11 @@
             margin-left: 30px;
             margin-right: 30px;
         }
-
     }
 
+    .category__slide4 {
+        @include mobile-only {
+            display: none;
+        }
+    }
 }
-
-

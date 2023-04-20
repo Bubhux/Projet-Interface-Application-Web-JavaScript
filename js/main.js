@@ -1,5 +1,13 @@
 
-//Request fetch
+
+/**
+* Fonction asynchrone qui récupère des données via une requête fetch.
+* @async
+* @function
+* @param {string} url - L'url de la requête fetch.
+* @param {function} functionUrl - La fonction qui traite les données reçues de la requête fetch.
+* @returns {Promise} - Retourne une promesse qui résout avec la réponse de la fonction qui traite les données reçues de la requête fetch ou rejette avec un objet erreur.
+*/
 async function loadResults (url, functionUrl) {
     try {
         const response = await fetch(url);
@@ -10,18 +18,26 @@ async function loadResults (url, functionUrl) {
     }
 }
 
-//Best film request
+//Requête pour le meilleur film.
 let bestFilmUrlList = "http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score";
 let bestFilmUrl;
 function bestFilmUrlFunc(result) {
     bestFilmUrl = result.results[0].url;   
     loadResults(bestFilmUrl, bestFilmResultMainPage);
 }
+
+/**
+* Fonction qui met à jour la page principale avec les données du meilleur film.
+* @function
+* @param {object} result - Les données reçues de la requête fetch.
+* @returns {void}
+*/
 function bestFilmResultMainPage(result){
     document.querySelector("#bestFilm__image").innerHTML = "<img src=" + result.image_url + "alt='Best Film Image' height='250' width='200'/>";
     document.querySelector("#bestFilm__title").innerHTML = result.original_title;
     document.querySelector("#bestFilm__description").innerHTML = result.description;
 }
+
 loadResults(bestFilmUrlList, bestFilmUrlFunc);
 let btn = document.querySelector("#bestFilm__buttonInfo");
 btn.onclick = function() {
@@ -29,7 +45,12 @@ btn.onclick = function() {
     modal.style.display = "block";
 }
 
-//Modal Results
+/**
+* Fonction qui met à jour la modale avec les données du film sélectionné.
+* @function
+* @param {object} result - Les données reçues de la requête fetch.
+* @returns {void}
+*/
 function FilmResultsModale(result){
     document.querySelector("#headerModal__filmImage").innerHTML = "<img src=" + result.image_url + "alt='Best Film Image' />";
     document.querySelector("#headerModal__originalTitle").innerHTML = result.original_title;
@@ -45,7 +66,7 @@ function FilmResultsModale(result){
     document.querySelector("#infoModalText__longDescription").innerHTML = result.long_description;
 }
 
-//Modal Window
+//Fenêtre modal
 let modal = document.querySelector("#infoModal");
 let span = document.getElementsByClassName("modalContent__close")[0];
 span.onclick = function() {
@@ -57,7 +78,11 @@ window.onclick = function(event) {
     }
 }
 
-//Categories
+/**
+* Crée une catégorie de films sur la page web avec une liste de films triés par popularité et note IMDB.
+* @param {string} category - Le nom de la catégorie à créer.
+* @returns {void}
+*/
 function makeCategory(category) {
     const resultsImagesUrl = [];
     const resultsLinksUrl = [];
@@ -97,7 +122,18 @@ function makeCategory(category) {
     spanControlPrev.setAttribute('class', 'category__prev');
     spanControlPrev.textContent = '<';
     divSlider.appendChild(spanControlPrev);
-
+    
+    /**
+    * Crée et affiche les 4 slides de la catégorie avec un identifiant unique.
+    * Attache également un gestionnaire d'événement click à chaque slide,
+    * qui charge les résultats correspondants et affiche la modale des résultats.
+    * @param {string} idSection - L'identifiant unique de la section de la catégorie.
+    * @param {string[]} resultsLinksUrl - Un tableau d'URL des résultats de la catégorie.
+    * @param {HTMLElement} divSlider - L'élément HTML dans lequel les slides doivent être créés et affichés.
+    * @param {number} nbSlide - Le numéro de la slide actuelle.
+    * @param {HTMLElement} modal - L'élément HTML qui affiche la modale des résultats.
+    * @param {HTMLElement} FilmResultsModale - L'élément HTML dans lequel les résultats de la modale doivent être affichés.
+    */
     for (let i = 1; i < 5; i++) {
         const spanSlide = document.createElement('span');
         spanSlide.setAttribute('id', `slide${i}${idSection}`);
@@ -132,7 +168,12 @@ function makeCategory(category) {
     document.querySelector(`#next${idSection}`).onclick = () => changeSlideHandler(1);
 }
 
-//Change slide Category
+/**
+* Fonction qui permet de changer la slide de la catégorie.
+* @param {number} direction - Direction dans laquelle on veut changer la slide (-1 pour précédent, 1 pour suivant).
+* @param {number} nbSlide - Le numéro de la slide actuelle.
+* @returns {number} - Le numéro de la slide suivante.
+*/
 function changeSlide(direction, nbSlide) {
     nbSlide += direction;
     if (window.matchMedia("(max-width: 1280px)").matches) {
@@ -143,7 +184,18 @@ function changeSlide(direction, nbSlide) {
     return nbSlide;
 }
 
-//Request category films
+/**
+* Récupère les URLs de toutes les pages de films d'une catégorie et stocke les URL des images et des liens des films.
+* Affiche également les images des films dans la première slide du slider de la catégorie.
+* @async
+* @function
+* @param {string[]} urlList - Une liste d'URLs des pages de films d'une catégorie.
+* @param {string[]} resultsImagesUrl - Un tableau dans lequel stocker les URLs des images des films.
+* @param {string[]} resultsLinksUrl - Un tableau dans lequel stocker les URLs des liens des films.
+* @param {string[]} picturesSlides - Un tableau dans lequel stocker les balises HTML des images des films à afficher dans le slider de la catégorie.
+* @param {string} idSection - L'ID de la section HTML de la catégorie.
+* @throws {Error} - Une erreur si la requête fetch échoue.
+*/
 async function getAllUrls(urlList, resultsImagesUrl, resultsLinksUrl, picturesSlides, idSection) {
     try {
         let data = await Promise.all(urlList.map(url => fetch(url).then(response => response.json())));
@@ -163,7 +215,12 @@ async function getAllUrls(urlList, resultsImagesUrl, resultsLinksUrl, picturesSl
     displayPictureSlide(idSection, picturesSlides, 0);
 }
 
-//Display category films
+/**
+* Affiche les images des films de la catégorie correspondante
+* @param {string} idSection - L'identifiant de la section qui contient la catégorie de films
+* @param {string[]} picturesSlides - Un tableau contenant les URL des images des films
+* @param {number} nbSlide - L'index de la slide actuellement affichée
+*/
 function displayPictureSlide(idSection, picturesSlides, nbSlide){
     for (let i=1; i<5; i++){
         if (nbSlide + (i - 1) !== 7){
@@ -174,7 +231,7 @@ function displayPictureSlide(idSection, picturesSlides, nbSlide){
     }
 }
 
-//Generate categories
+//Génère les catégories à afficher.
 const categories = [
     "Film les mieux notés",
     "Romance",

@@ -1,22 +1,14 @@
 
-
 .nav__navigation {
-    //padding-right: $layout-margin;
     flex: auto;
     text-align: right;
-    //list-style-type: none;
-    //margin: 5px;
-    //padding: 5px;
     padding-right: 1.5rem;
     padding-bottom: 5px;
-    //@include border($colour-primary);
-    //padding-left: 1700px;
-    //position: relative;
 
     &__ul {
         text-align: right;
     }
-    
+
     &__link {
         list-style-type: none;
         display: inline;

@@ -1,61 +1,60 @@
 
-
 .footer {
+    display: flex;
+    padding-top: 10px;
+    font-size: 0.8em;
+    @include border-radius($border:$border-radius);
+    @include box-shadow($box-shadow);
+
+    & h2 {
+        color: white;
+        text-shadow: 5px 5px 2px rgb(0, 0, 0);
+    }
+
+    & a {
+        text-decoration: underline;
+            color: #27292a;
+    }
+
+    & a:hover {
+        text-decoration: underline;
+        color: $colour-accent;
+    }
+
+    &__tweets {
+        width: 28%;
+        margin-left: 5px;
+        #message__1, #message__2 {
+            line-height: 0.1em;
+        }
+    }
+
+    &__images {
+        width: 50%;
+        & img {
+            width: 50px;
+            border: 1px solid #181818;
+            border-radius: 15px;
+            margin-right: 3px;
+            margin-top: -10px;
+        }
+    }
+     
+    &__subscribers {
+        width: 30%;
+        & ul {
+            padding-left: 1px;
+        }
+        & li {
+            list-style-type: none;
+        }
+        & li:before {
+            content: "→";
+        }
+    }
+
+    &__list__subscribers {
         display: flex;
-        padding-top: 10px;
-        font-size: 0.8em;
-        @include border-radius($border:$border-radius);
-        //@include border($colour-primary);
-        @include box-shadow($box-shadow);
-        & h2 {
-            color: white;
-            text-shadow: 5px 5px 2px rgb(0, 0, 0);
-        }
-
-        & a {
-            text-decoration: underline;
-   	        color: #27292a;
-        }
-
-        & a:hover {
-            text-decoration: underline;
-            color: $colour-accent;
-        }
-
-        &__tweets {
-            width: 28%;
-            margin-left: 5px;
-            #message__1, #message__2 {
-                line-height: 0.1em;
-            }
-        }
-
-        &__images {
-            width: 50%;
-            & img {
-                width: 50px;
-                border: 1px solid #181818;
-                border-radius: 15px;
-                margin-right: 3px;
-                margin-top: -10px;
-            }
-        }
-         
-        &__subscribers {
-            width: 30%;
-            & ul {
-                padding-left: 1px;
-            }
-            & li {
-                list-style-type: none;
-            }
-            & li:before {
-                content: "→"; /* caractère UTF-8 */
-            }
-        }
-
-        &__list__subscribers {
-            display: flex;
-            margin-top: -20px;
-        }   
+        margin-top: -20px;
+    }   
 }

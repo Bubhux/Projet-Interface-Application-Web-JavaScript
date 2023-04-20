@@ -1,36 +1,24 @@
 
-
 .banner {
     
     #bestFilm {
         display: -webkit-box;
         display: -ms-flexbox;
-        //display: flex;
-        //-ms-flex-wrap: wrap;
         flex-wrap: wrap;
-        //-webkit-box-pack: center;
-        //-ms-flex-pack: center;
         justify-content: center;
         margin-top: 0.3em;
         height: 280px;
         margin-right: 5px;
         margin-left: 5px;
-        //border-radius: 5px;
-        //@include border($colour-primary);
-        //@include border-radius($border:$border-radius);
         
         & img {
             margin-top: -20px;
-            //margin-bottom: 100px;
-            //left: -320;
-            //@include border($colour-primary);
             height: 100%;
             @include border-radius($border:$border-radius);
-            
+            @include mobile-only {
+            }
         }
     }
-    
-
 
     #besfFilm_image:hover {
         transform: translate3d(0, -10px, 0);
@@ -38,14 +26,14 @@
 
     #bestFilm__title {
         font-size: 1em;
-        //font-weight: bold;
-        //margin-bottom: 10px;
         text-shadow: 5px 5px 2px rgb(0, 0, 0);
         text-align: center;
         color: white;
         margin-right: 200px;
-        //@include border($colour-primary);
-
+        @include mobile-only {
+            font-size: 2em;
+            margin-left: 100px;
+        }
     }
 
     #bestFilm h1 {
@@ -53,32 +41,23 @@
         margin-bottom: 3px;
         width: 100%;
         text-align: center;
-        //margin-bottom: 30px;
         font-size: 1.5em;
         color: white;
-        //text-shadow: 3px 3px 1px rgb(0, 0, 0);
         text-shadow: 5px 5px 2px rgb(0, 0, 0);
     }
 
     #bestFilm h2 {
-        //margin-top: 5px;
-        //width: 100%;
-        //text-align: center;
         font-size: 0.9em;
         margin-right: 340px;
-        //text-shadow: 3px 3px 1px rgb(0, 0, 0);
+        @include mobile-only {
+            font-size: 1.5em;
+            margin-left: 160px;
+        }
     }
 
     #bestFilm__info {
-        //display: -webkit-box;
-        //display: -ms-flexbox;
         display: flex;
-        //-webkit-box-orient: vertical;
-        //-webkit-box-direction: normal;
-        //-ms-flex-direction: column;
         flex-direction: column;
-        //-webkit-box-align:center;
-        //-ms-flex-align:center;
         align-items:center; 
         margin-left: 1px;
         width: 40%;
@@ -86,21 +65,22 @@
 
     #bestFilm__description {
         max-width: 80%;
-        //text-align: center;
     }
 
     #bestFilm__buttonInfo {
-        //margin-top: 90px;
         height: 25px;
         background-color:  rgb(95, 95, 95);
         border-radius: 3px;
         font-size: 0.9em;
         text-align: center;
-        //padding: 0px 4px 0px 4px;
         color: rgb(255, 255, 255);
         text-decoration: none;
         position: absolute;
         top: 300px;
         left: 60px;
+        @include mobile-only {
+            margin-left: 190px;
+            margin-top: -100px;
+        }
     }
 }
