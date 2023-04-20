@@ -23,8 +23,8 @@
 
 ## Liste pré-requis   
 Interface élaborée avec les logiciels suivants:   
--Python v3.7.2 choisissez la version adaptée a votre ordinateur et système. Python est disponible à l'adresse suivante   
-  https://www.python.org/downloads/   
+-Python v3.7.2 choisissez la version adaptée a votre ordinateur et système. Python est disponible à l'adresse   
+ suivante https://www.python.org/downloads/   
 -API "OCMovies-API"   
 -Sublime Text 3.2.2 build 3211   
 -Nodejs V12.18.1   
@@ -58,11 +58,11 @@ env\Scripts\activate.bat
 - **Pour désactiver l'environnement virtuel, il suffit de taper dans votre terminal:**   
 ```bash  
 deactivate
-```
+```   
 
 ## Télégarchement et installation de L'API   
 -L'installation et des informations sur le fonctionnement de l'API se trouvent à l'adresse suivante   
-https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR   
+ https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR   
 
 ## Lancement de l'API   
 -Pour exécuter l'API activer l'environnement virtuel.   
@@ -70,7 +70,7 @@ https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR
 **-Taper dans votre terminal la commande:**   
 ```bash
 python manage.py runserver
-```
+```   
 
 ## Lancement de 'linterface web   
 -Pour lancer le l'interface web ouvrir le fichier index.html dans le navigateur de votre choix.   
@@ -79,13 +79,13 @@ python manage.py runserver
 -main.js   
     Contient tout le code javascript. Il est appelé dans le fichier index.html avec la commande suivante :   
     ```python
-    <script src="js/main.js" async></script>
-    ```
+    <script src="js/main.js" async></script>   
+    ```   
     Ce fichier contient tous les processus de traitement des événements et toute la gestion des données.   
 
 -index.html   
     Ce fichier contient le code html de base et toutes les relations de lien nécessaires pour permettre au code de s'exécuter correctement.   
-    s'exécuter correctement. Tout comme la commande précédente, il appelle également des fichiers CSS et d'autres liens   Javascript.  
+    s'exécuter correctement. Tout comme la commande précédente, il appelle également des fichiers CSS et d'autres liens Javascript.   
     ```W3C``` renvoie : Document checking completed. No errors or warnings to show.   
 
 -styles.css   
