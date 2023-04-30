@@ -72,7 +72,7 @@ deactivate
 python manage.py runserver
 ```   
 
-## Lancement de 'linterface web   
+## Lancement de l'interface web   
 -Pour lancer le l'interface web ouvrir le fichier index.html dans le navigateur de votre choix.   
    
 ## Informations importantes sur les différents fichiers et dossiers   
