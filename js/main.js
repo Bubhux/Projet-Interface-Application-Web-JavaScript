@@ -134,17 +134,17 @@ function makeCategory(category) {
     * @param {HTMLElement} modal - L'élément HTML qui affiche la modale des résultats.
     * @param {HTMLElement} FilmResultsModale - L'élément HTML dans lequel les résultats de la modale doivent être affichés.
     */
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 8; i++) {
         const spanSlide = document.createElement('span');
         spanSlide.setAttribute('id', `slide${i}${idSection}`);
         spanSlide.setAttribute('class', `category__slide category__slide${i}`);
         divSlider.appendChild(spanSlide);
 
         spanSlide.onclick = function () {
-          const index = nbSlide + (i - 1);
-          const link = index < 7 ? resultsLinksUrl[index] : resultsLinksUrl[0];
-          loadResults(link, FilmResultsModale);
-          modal.style.display = 'block';
+            const index = nbSlide + (i - 1);
+            const link = index < 7 ? resultsLinksUrl[index] : resultsLinksUrl[0];
+            loadResults(link, FilmResultsModale);
+            modal.style.display = 'block';
         };
     }
 
@@ -154,7 +154,7 @@ function makeCategory(category) {
     spanControlNext.textContent = '>';
     divSlider.appendChild(spanControlNext);
 
-    const urlList = [`${FilmUrlList}&page=1`, `${FilmUrlList}&page=2`];
+    const urlList = [`${FilmUrlList}&page=1`, `${FilmUrlList}&page=2`, `${FilmUrlList}&page=3`];
     getAllUrls(urlList, resultsImagesUrl, resultsLinksUrl, picturesSlides, idSection);
 
     let nbSlide = 0;
@@ -167,6 +167,37 @@ function makeCategory(category) {
     document.querySelector(`#prev${idSection}`).onclick = () => changeSlideHandler(-1);
     document.querySelector(`#next${idSection}`).onclick = () => changeSlideHandler(1);
 }
+
+/**
+* Ajuste les slides en fonction de la largeur de l'écran.
+* @function adjustSlides
+* @returns {void}
+*/
+function adjustSlides() {
+    const screenWidth = window.innerWidth;
+    const sliderList = document.getElementsByClassName('list');
+    for (let i = 0; i < sliderList.length; i++) {
+        const slider = sliderList[i];
+        const slides = slider.getElementsByClassName('category__slide');
+        if (screenWidth <= 800) {
+            slider.style.width = '80%';
+            for (let j = 0; j < slides.length; j++) {
+                if (j >= 3) {
+                    slides[j].style.display = 'none';
+                } else {
+                    slides[j].style.display = 'inline-block';
+                }
+            }
+        } else {
+            slider.style.width = '100%';
+            for (let j = 0; j < slides.length; j++) {
+                slides[j].style.display = 'inline-block';
+            }
+        }
+    }
+}
+
+window.addEventListener('resize', adjustSlides);
 
 /**
 * Fonction qui permet de changer la slide de la catégorie.
@@ -221,12 +252,13 @@ async function getAllUrls(urlList, resultsImagesUrl, resultsLinksUrl, picturesSl
 * @param {string[]} picturesSlides - Un tableau contenant les URL des images des films
 * @param {number} nbSlide - L'index de la slide actuellement affichée
 */
-function displayPictureSlide(idSection, picturesSlides, nbSlide){
-    for (let i=1; i<5; i++){
-        if (nbSlide + (i - 1) !== 7){
-        document.querySelector("#slide"+ i + idSection).innerHTML = picturesSlides[nbSlide + (i - 1)];
+function displayPictureSlide(idSection, picturesSlides, nbSlide) {
+    for (let i = 1; i < 8; i++) {
+        if (nbSlide + (i - 1) < picturesSlides.length) {
+            document.querySelector(`#slide${i}${idSection}`).innerHTML = picturesSlides[nbSlide + (i - 1)];
         } else {
-        document.querySelector("#slide"+ i + idSection).innerHTML = picturesSlides[0];
+            const index = (nbSlide + (i - 1)) % picturesSlides.length;
+            document.querySelector(`#slide${i}${idSection}`).innerHTML = picturesSlides[index];
         }
     }
 }
@@ -242,3 +274,4 @@ const categories = [
 for (let category of categories) {
     makeCategory(category);
 }
+
