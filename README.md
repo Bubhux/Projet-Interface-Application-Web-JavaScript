@@ -90,6 +90,9 @@ python manage.py runserver
 
 -styles.css   
     Contient tous les styles du projet.   
+    ```W3C CSS``` renvoie : la validation W3C CSS de style.css (CSS niveau 3 + SVG).   
+    Aucune erreur trouvée.   
+    Ce document est valide conformément à la recommandation CSS niveau 3 + SVG !   
 
 -main.scss   
     Ce fichier est utilisé pour le style du projet. Ce fichier est compilé par sass et adaptera   
