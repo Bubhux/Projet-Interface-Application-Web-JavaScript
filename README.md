@@ -10,7 +10,7 @@
 9. **Auteurs et contact**   
 
 
-## Développez une interface utilisateur pour une application web Python   
+## Développez une interface utilisateur pour une application web JavaScript   
 - Projet de création d'une interface web utilisant l'API "OCMovies-API" permettant d'afficher   
   le meilleur film selon le score  du site  IMDB.   
   L'interface utilise une structure HTML ainsi qu'une strucuture sass pour la partie css et un code javascript.   
