@@ -73,7 +73,7 @@ python manage.py runserver
 ```   
 
 ## Lancement de l'interface web   
--Pour lancer le l'interface web ouvrir le fichier index.html dans le navigateur de votre choix.   
+-Pour lancer l'interface web ouvrir le fichier index.html dans le navigateur de votre choix.   
    
 ## Informations importantes sur les différents fichiers et dossiers   
 -main.js   
