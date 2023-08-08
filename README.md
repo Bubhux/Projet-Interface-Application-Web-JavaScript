@@ -1,5 +1,5 @@
-[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com) [![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com) ![use SASS](/images/use-sass.svg)
-
+![Static Badge](https://img.shields.io/badge/BUILD_WITH-PYTHON-red?style=for-the-badge&logo=python) ![Static Badge](https://img.shields.io/badge/BUILD_WITH-JAVASCRIPT-blue?style=for-the-badge&logo=javascript)
+![Static Badge](https://img.shields.io/badge/USE-HTML-blue?style=for-the-badge&logo=html5) ![Static Badge](https://img.shields.io/badge/USE-SASS-blue?style=for-the-badge&logo=sass)
 # Menu   
 1. **Informations générales**   
 2. **Liste pré-requis**   
