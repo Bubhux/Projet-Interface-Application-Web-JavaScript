@@ -27,6 +27,10 @@ h1 {
   text-shadow: 5px 5px 2px rgb(0, 0, 0);
 }
 
+p {
+  color: #fff;
+}
+
 header {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background: #202020;
@@ -65,87 +69,59 @@ header #header__navigation a:hover {
 .title {
   font-size: 20px;
   color: #4a3636;
-  /*font-weight: bold;*/
-  margin-bottom: 25px;
-  margin-bottom: -60px;
-  margin-top: 20px;
-  margin-left: 50px;
-  margin-right: 50px;
-  padding-bottom: 20px;
-  padding-top: 20px;
-  /*padding-left: 10px;*/
-  /*border: .2rem solid #f37646;*/
-  /*border-radius: 10px;*/
+  margin: 20px 50px -60px;
+  padding: 20px 0;
   text-align: center;
 }
 
 .item {
-  margin: 100px 25px;
-  background-color: #fff;
+  margin: 50px 25px;
+  /*background-color: #fff;*/
   box-shadow: 0 15px 35px rgba(50, 50, 50, 0.1019607843), 0 5px 15px rgba(0, 0, 0, 0.1019607843);
   transition: transform 0.3s;
   transform: translate3d(0, -1px, 0);
   border-radius: 10px;
+  position: relative;
 }
-
 .item:hover {
   transform: translate3d(0, -10px, 0);
 }
-
 .item img {
   display: block;
   width: 100%;
   height: auto;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 10px 10px 0 0;
   cursor: pointer;
 }
-
 .item__body {
   padding: 25px;
 }
-
 .item__title {
   font-size: 20px;
   margin-bottom: 5px;
   font-weight: bold;
   color: #232323;
 }
-
 .item__description {
   color: #585858;
 }
 
-.item {
-  position: relative;
-}
-
-/**
- Carousel
- */
 .carousel {
   position: relative;
 }
-
+.carousel__container {
+  transition: transform 0.3s;
+  transform: translate3d(0, 0, 0);
+}
 .carousel__container::after {
   content: "";
   clear: both;
   display: table;
 }
-
-.carousel__container {
-  transition: transform 0.3s;
-  transform: translate3d(0, 0, 0);
-}
-
 .carousel__item {
   float: left;
 }
-
-.carousel__next,
-.carousel__prev {
+.carousel__next, .carousel__prev {
   position: absolute;
   width: 40px;
   height: 40px;
@@ -154,28 +130,22 @@ header #header__navigation a:hover {
   border-radius: 50%;
   top: 50%;
   margin-top: -20px;
-  right: 0px;
+  right: 0;
   box-shadow: 0 15px 35px rgba(50, 50, 50, 0.1019607843), 0 5px 15px rgba(0, 0, 0, 0.1019607843);
   cursor: pointer;
   transition: transform 0.3s, opacity 0.3s;
 }
-
-.carousel__next:hover,
-.carousel__prev:hover {
+.carousel__next:hover, .carousel__prev:hover {
   transform: scale(1.2);
 }
-
 .carousel__prev {
   background-image: url(../static/img/keyboard_left.svg);
   right: auto;
-  left: 0px;
+  left: 0;
 }
-
-.carousel__next--hidden,
-.carousel__prev--hidden {
+.carousel__next--hidden, .carousel__prev--hidden {
   opacity: 0;
 }
-
 .carousel__pagination {
   position: absolute;
   bottom: 0;
@@ -184,7 +154,6 @@ header #header__navigation a:hover {
   text-align: center;
   display: none;
 }
-
 .carousel__pagination__button {
   background-color: #fff;
   width: 10px;
@@ -196,14 +165,12 @@ header #header__navigation a:hover {
   transition: transform 0.3s;
   cursor: pointer;
 }
-
-.carousel__pagination__button--active,
-.carousel__pagination__button:hover {
+.carousel__pagination__button--active, .carousel__pagination__button:hover {
   transform: scale(1.4);
 }
 
 .modal {
-  display: none; /* Cacher la modale par défaut */
+  display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -213,13 +180,10 @@ header #header__navigation a:hover {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.8);
 }
-
 .modal--visible {
   display: block;
 }
-
 .modal__content {
-  /*background: linear-gradient(45deg, #f37646, #f3e946) center center no-repeat;*/
   margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -227,24 +191,20 @@ header #header__navigation a:hover {
   max-width: 1000px;
   text-align: center;
   border-radius: 10px;
-  padding-top: 0px;
+  padding-top: 0;
 }
-
 .modal__image img {
   width: 100%;
   height: auto;
   border-radius: 10px;
 }
-
 .modal__close {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
-
-.modal__close:hover,
-.modal__close:focus {
+.modal__close:hover, .modal__close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -502,27 +462,6 @@ header #header__navigation a:hover {
   }
 }
 
-@font-face {
-  font-family: "quicksandlight";
-  src: url("quicksand-light-webfont.woff2") format("woff2"), url("quicksand-light-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-a:hover {
-  color: #00FFE8;
-}
-
-p {
-  /*font-family: "quicksandlight";*/
-  color: #fff;
-}
-
-hr {
-  height: 1px;
-  border: none;
-  background-color: #00FFE8;
-}
-
 .modal {
   display: none;
   position: fixed;
@@ -535,10 +474,17 @@ hr {
   justify-content: center;
   align-items: center;
 }
+.modal__separator {
+  border: none;
+  height: 2px;
+  background-color: #717171;
+  margin: 15px 0;
+  width: 100%;
+}
 .modal__content {
   padding: 20px;
   width: 100%;
-  max-width: 1500px; /* Largeur maximale réduite */
+  /*max-width: 1500px; /* Largeur maximale réduite */
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -567,6 +513,7 @@ hr {
   /*gap: 15px;*/
   flex-direction: column;
   align-items: stretch;
+  margin: auto;
 }
 .modal .movie__details #movie__header img {
   width: 100px;
@@ -597,22 +544,6 @@ hr {
   overflow-y: auto; /* Barre de défilement si nécessaire */
   word-wrap: break-word;
   padding-right: 100px;
-}
-.modal__modalContent {
-  opacity: 90%;
-  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(74, 54, 54) 0%, rgb(39, 28, 28) 0%, rgb(0, 0, 0) 100%);
-  margin: 5% auto;
-  padding: 10px;
-  width: 80%;
-  color: black;
-  border-radius: 30px;
-  -ms-flex-pack: distribute;
-  justify-content: space-around;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  text-shadow: 0.1rem 0.1rem #756d6d;
 }
 .modal__infoModalText__infoText {
   text-align: center;

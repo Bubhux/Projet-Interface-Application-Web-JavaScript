@@ -346,7 +346,7 @@ async function loadResults (url, functionUrl) {
 }
 
 // Requête pour le meilleur film.
-let bestFilmUrlList = "http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score";
+let bestFilmUrlList = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=1";
 let bestFilmUrl;
 function bestFilmUrlFunc(result) {
     bestFilmUrl = result.results[0].url;   
@@ -368,23 +368,28 @@ btn.onclick = function() {
     modal.style.display = "block";
 }
 
-function FilmResultsModale(result){
-    document.querySelector("#headerModal__filmImage").innerHTML = "<img src=" + result.image_url + " alt='Best Film Image' />";
-    document.querySelector("#headerModal__originalTitle").innerHTML = result.original_title;
-    document.querySelector("#infoModalText__genres").innerHTML = result.genres;
-    document.querySelector("#infoModalText__datePublished").innerHTML = result.date_published;
-    document.querySelector("#infoModalText__rated").innerHTML = result.rated;
-    document.querySelector("#infoModalText__imdbScore").innerHTML = result.imdb_score;
-    document.querySelector("#infoModalText__directors").innerHTML = result.directors;
+function FilmResultsModale(result) {
+    document.querySelector("#headerModal__filmImage").innerHTML =
+        result.image_url ? `<img src="${result.image_url}" alt="Best Film Image" />` : "No image available";
 
-    // Formate les acteurs en ajoutant une virgule et un espace entre chaque nom
-    let formattedActors = result.actors.join(', ');
+    document.querySelector("#headerModal__originalTitle").innerHTML = result.original_title || "Unknown Title";
+    document.querySelector("#infoModalText__genres").innerHTML = result.genres || "N/A";
+    document.querySelector("#infoModalText__datePublished").innerHTML = result.date_published || "Unknown";
+    document.querySelector("#infoModalText__rated").innerHTML = result.rated || "N/A";
+    document.querySelector("#infoModalText__imdbScore").innerHTML = result.imdb_score || "N/A";
+    document.querySelector("#infoModalText__directors").innerHTML = result.directors || "Unknown";
+
+    // Vérifie si result.actors est défini et est un tableau avant d'appliquer join()
+    let formattedActors = Array.isArray(result.actors) ? result.actors.join(', ') : "Unknown";
     document.querySelector("#infoModalText__actors").innerHTML = 'Acteurs : ' + formattedActors;
 
-    document.querySelector("#infoModalText__duration").innerHTML = result.duration + ' min';
-    document.querySelector("#infoModalText__countries").innerHTML = result.countries;
-    document.querySelector("#infoModalText__worldwideGrossIncome").innerHTML = result.worldwide_gross_income + ' $';
-    document.querySelector("#infoModalText__longDescription").innerHTML = result.long_description;
+    document.querySelector("#infoModalText__duration").innerHTML = result.duration ? result.duration + " min" : "Unknown";
+    document.querySelector("#infoModalText__countries").innerHTML = result.countries || "Unknown";
+
+    document.querySelector("#infoModalText__worldwideGrossIncome").innerHTML =
+        result.worldwide_gross_income ? result.worldwide_gross_income + " $" : "N/A";
+
+    document.querySelector("#infoModalText__longDescription").innerHTML = result.long_description || "No description available.";
 }
 
 window.onclick = function(event) {

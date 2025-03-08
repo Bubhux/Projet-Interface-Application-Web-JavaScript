@@ -9,7 +9,6 @@
     src: url('../fonts/Roboto-Medium.ttf') format('truetype');
 }
 
-
 body {
     font-family: 'Roboto';
     font-weight: 150;
@@ -23,4 +22,8 @@ h1 {
     font-size: 2em;
     color: white;
     text-shadow: 5px 5px 2px rgb(0, 0, 0)
+}
+
+p {
+    color: #fff;
 }

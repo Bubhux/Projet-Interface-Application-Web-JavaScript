@@ -1,24 +1,4 @@
-@font-face {
-    font-family: "quicksandlight";
-    src: url("quicksand-light-webfont.woff2") format("woff2"), url("quicksand-light-webfont.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-}
 
-a:hover {
-    color: #00FFE8;
-}
-
-p {
-    /*font-family: "quicksandlight";*/
-    color: #fff;
-}
-
-hr {
-    height: 1px;
-    border: none;
-    background-color: #00FFE8;
-}
 
 .modal {
     display: none;
@@ -32,10 +12,18 @@ hr {
     justify-content: center;
     align-items: center;
 
+    &__separator {
+        border: none; 
+        height: 2px;
+        background-color: #717171;
+        margin: 15px 0;
+        width: 100%;
+    }
+
     &__content {
         padding: 20px;
         width: 100%;
-        max-width: 1500px; /* Largeur maximale réduite */
+        /*max-width: 1500px; /* Largeur maximale réduite */
         border-radius: 10px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         position: relative;
@@ -67,6 +55,7 @@ hr {
             /*gap: 15px;*/
             flex-direction: column;
             align-items: stretch;
+            margin: auto;
 
             img {
                 width: 100px;
@@ -103,21 +92,6 @@ hr {
         overflow-y: auto; /* Barre de défilement si nécessaire */
         word-wrap: break-word;
         padding-right: 100px;
-    }
-
-    &__modalContent {
-        opacity: 90%;
-        background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(74,54,54,1) 0%, rgba(39,28,28,1) 0%, rgba(0,0,0,1) 100%);
-        margin: 5% auto;
-        padding: 10px;
-        width: 80%;
-        color: black;
-        border-radius: 30px;
-        -ms-flex-pack: distribute;
-        justify-content: space-around;
-        @include display;
-        @include box-shadow($box-shadow);
-        @include heading-shadow;
     }
 
     &__infoModalText__infoText {
