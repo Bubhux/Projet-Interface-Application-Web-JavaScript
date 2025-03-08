@@ -1,6 +1,8 @@
 
 header {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background: #202020;
+    margin: 25px;
     @include border-radius($border:$border-radius);
 
     & img {
@@ -12,10 +14,6 @@ header {
 
     & h1 {
         margin-left: 20px;
-    }
-
-    #banniere__image {
-
     }
 
     #header__navigation {

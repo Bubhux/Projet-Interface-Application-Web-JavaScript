@@ -12,9 +12,10 @@
         margin-left: 5px;
         
         & img {
-            margin-top: -20px;
+            margin-top: -30px;
             height: 100%;
-            @include border-radius($border:$border-radius);
+            margin-left: 10px;
+            @include border-radius(10px);
             @include mobile-only {
             }
         }
@@ -37,7 +38,7 @@
     }
 
     #bestFilm h1 {
-        margin-top: 1px;
+        margin-top: 15px;
         margin-bottom: 3px;
         width: 100%;
         text-align: center;
@@ -49,6 +50,8 @@
     #bestFilm h2 {
         font-size: 0.9em;
         margin-right: 340px;
+        margin-bottom: 5px; /* Réduction de l'espace sous "Résumé" */
+        
         @include mobile-only {
             font-size: 1.5em;
             margin-left: 160px;
@@ -57,27 +60,38 @@
 
     #bestFilm__info {
         display: flex;
+        align-items: baseline;
+        margin-left: 10px;
+        width: 50%;
+        justify-content: space-evenly;
         flex-direction: column;
-        align-items:center; 
-        margin-left: 1px;
-        width: 40%;
     }
 
     #bestFilm__description {
-        max-width: 80%;
+        max-width: 100%;
+        margin-top: -50px; /* Réduction de l'espace au-dessus du texte */
     }
 
     #bestFilm__buttonInfo {
+        display: inline-block;
+        /*padding: 8px 12px;*/
+        background: #717171;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s ease;
         height: 25px;
-        background-color:  rgb(95, 95, 95);
-        border-radius: 3px;
         font-size: 0.9em;
         text-align: center;
         color: rgb(255, 255, 255);
-        text-decoration: none;
         position: absolute;
         top: 300px;
-        left: 60px;
+        left: 70px;
+        cursor: pointer;
+
+        &:hover {
+            background: #424242;
+        }
+
         @include mobile-only {
             margin-left: 190px;
             margin-top: -100px;

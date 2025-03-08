@@ -37,88 +37,70 @@
                     </div>
             </section>
         </div>
-    
+
         <main class="container">
-            <div id="infoModal" class="modal">
-                <div class="modal__modalContent">
-                    <span class="modalContent__close"></span>
-                    <div id=headerModal>
-                        <span id=headerModal__originalTitle></span>
-                        <span id=headerModal__filmImage></span>
-                    </div>
-                    <div id=infoModalText>
-                        <div class=modal__infoModalText__info>
-                            <span class=modal__infoModalText__titleInfo>Genres:</span>
-                            <span class=modal__infoModalText__infoText id=infoModalText__genres></span>
-                        </div>  
-                        <div class=modal__infoModalText__info>
-                            <span class=modal__infoModalText__titleInfo>Date de sortie:</span>
-                            <span class=modal__infoModalText__infoText id=infoModalText__datePublished></span>
-                        </div>  
-                        <div class=modal__infoModalText__info>
-                            <span class=modal__infoModalText__titleInfo>Classification:</span>
-                            <span class=modal__infoModalText__infoText id=infoModalText__rated></span>
-                        </div>  
-                        <div class=modal__infoModalText__info>
-                            <span class=modal__infoModalText__titleInfo>Score IMDB:</span>
-                            <span class=modal__infoModalText__infoText id=infoModalText__imdbScore></span>
-                        </div> 
-                        <div class=modal__infoModalText__info>
-                            <span class=modal__infoModalText__titleInfo>Réalisateur:</span>
-                            <span class=modal__infoModalText__infoText id=infoModalText__directors></span>
-                        </div> 
-                        <div class=modal__infoModalText__info>
-                            <span class=modal__infoModalText__titleInfo>Acteurs:</span>
-                            <span class=modal__infoModalText__infoText id=infoModalText__actors></span>
-                        </div> 
-                        <div class=modal__infoModalText__info>
-                            <span class=modal__infoModalText__titleInfo >Durée:</span>
-                            <span class=modal__infoModalText__infoText id=infoModalText__duration></span>
-                        </div> 
-                        <div class=modal__infoModalText__info>
-                            <span class=modal__infoModalText__titleInfo>Pays:</span>
-                            <span class=modal__infoModalText__infoText id=infoModalText__countries></span>
-                        </div> 
-                        <div class=modal__infoModalText__info>
-                            <span class=modal__infoModalText__titleInfo>Box Office</span>
-                            <span class=modal__infoModalText__infoText id=infoModalText__worldwideGrossIncome></span>
-                        </div> 
-                        <div class=modal__infoModalText__info>
-                            <span class=modal__infoModalText__titleInfo>Résumé:</span>
-                            <span class=modal__infoModalText__infoText id=infoModalText__longDescription></span>
+            <div id="modal" class="modal">
+                <div class="modal__content">
+                    <span class="modal__close">&times;</span>
+                    <div class="movie__details">
+                        <div id="movie__header">
+                            <img id="movie__image" src="">
+                            <div>
+                                <h1 id="movie__title"></h1>
+                                <a class="btn" role="button" href="#" target="_blank">See on Imdb</a>
+                            </div>
+                        </div>
+                        <span class="modalContent__close"></span>
+                        <div id=headerModal>
+                            <span id=headerModal__originalTitle></span>
+                            <span id=headerModal__filmImage></span>
+                        </div>
+                        <div id=infoModalText>
+                            <div class=modal__infoModalText__info>
+                                <span class=modal__infoModalText__titleInfo>Genres :</span>
+                                <span class=modal__infoModalText__infoText id=infoModalText__genres></span>
+                            </div>
+                            <div class=modal__infoModalText__info>
+                                <span class=modal__infoModalText__titleInfo>Date de sortie :</span>
+                                <span class=modal__infoModalText__infoText id=infoModalText__datePublished></span>
+                            </div>  
+                            <div class=modal__infoModalText__info>
+                                <span class=modal__infoModalText__titleInfo>Classification :</span>
+                                <span class=modal__infoModalText__infoText id=infoModalText__rated></span>
+                            </div>  
+                            <div class=modal__infoModalText__info>
+                                <span class=modal__infoModalText__titleInfo>Score IMDB :</span>
+                                <span class=modal__infoModalText__infoText id=infoModalText__imdbScore></span>
+                            </div> 
+                            <div class=modal__infoModalText__info>
+                                <span class=modal__infoModalText__titleInfo>Réalisateur :</span>
+                                <span class=modal__infoModalText__infoText id=infoModalText__directors></span>
+                            </div> 
+                            <div class=modal__infoModalText__info>
+                                <span class=modal__infoModalText__titleInfo>Acteurs:</span>
+                                <span class=modal__infoModalText__infoText id=infoModalText__actors></span>
+                            </div> 
+                            <div class=modal__infoModalText__info>
+                                <span class=modal__infoModalText__titleInfo >Durée :</span>
+                                <span class=modal__infoModalText__infoText id=infoModalText__duration></span>
+                            </div> 
+                            <div class=modal__infoModalText__info>
+                                <span class=modal__infoModalText__titleInfo>Pays :</span>
+                                <span class=modal__infoModalText__infoText id=infoModalText__countries></span>
+                            </div> 
+                            <div class=modal__infoModalText__info>
+                                <span class=modal__infoModalText__titleInfo>Box Office :</span>
+                                <span class=modal__infoModalText__infoText id=infoModalText__worldwideGrossIncome></span>
+                            </div> 
+                            <div class=modal__infoModalText__info>
+                                <span class=modal__infoModalText__titleInfo>Résumé:</span>
+                                <span class=modal__infoModalText__infoText id=infoModalText__longDescription></span>
+                            </div>
                         </div>
                     </div>
                 </div>
-           </div>
-        </main>
-    </div>
-
-    <div id="modal" class="modal">
-        <div class="modal__content">
-            <span class="modal__close">&times;</span>
-            <div class="movie__details">
-                <div id="movie__header">
-                    <img id="movie__image" src="">
-                    <div>
-                        <h1 id="movie__title"></h1>
-                        <a class="btn" role="button" href="#" target="_blank">See on Imdb</a>
-                    </div>
-                </div>
-                <br><br>
-                <hr>
-                <br><br>
-                <p id="genre" class="movie__details"></p>
-                <p id="date" class="movie__details"></p>
-                <p id="rated" class="movie__details"></p>
-                <p id="imdb_score" class="movie__details"></p>
-                <p id="director" class="movie__details"></p>
-                <p id="actors" class="movie__details"></p>
-                <p id="duration" class="movie__details"></p>
-                <p id="country" class="movie__details"></p>
-                <p id="box-office" class="movie__details"></p>
-                <p id="description" class="movie__details"></p>
             </div>
-        </div>
+        </main>
     </div>
 
     <footer class="footer">

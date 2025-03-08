@@ -1,7 +1,7 @@
 .title {
     font-size: 20px;
     color: #4a3636;
-    font-weight: bold;
+    /*font-weight: bold;*/
     margin-bottom: 25px;
     margin-bottom: -60px;
     margin-top: 20px;
@@ -9,9 +9,9 @@
     margin-right: 50px;
     padding-bottom: 20px;
     padding-top: 20px;
-    padding-left: 10px;
-    border: .2rem solid #f37646;
-    border-radius: 10px;
+    /*padding-left: 10px;*/
+    /*border: .2rem solid #f37646;*/
+    /*border-radius: 10px;*/
     text-align: center;
 }
 
@@ -155,8 +155,8 @@
 }
 
 .modal__content {
-    background: linear-gradient(45deg, #f37646, #f3e946) center center no-repeat;
-    margin: 15% auto;
+    /*background: linear-gradient(45deg, #f37646, #f3e946) center center no-repeat;*/
+    margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;

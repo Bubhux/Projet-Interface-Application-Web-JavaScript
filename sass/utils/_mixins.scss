@@ -7,8 +7,8 @@
     border: .1rem solid $colour;
 }
 
-@mixin border-radius($border:$border-radius) {
-    border-radius: 20px $border;
+@mixin border-radius($border: 5px) {
+    border-radius: $border;
 }
 
 @mixin box-shadow($box:$box-shadow) {

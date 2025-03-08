@@ -5,7 +5,9 @@
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-bottom: 25px;
-    @include border-radius($border:$border-radius);
+    background: #202020;
+    margin: 25px;
+    @include border-radius(20px);
 
     &__image {
         position: absolute;

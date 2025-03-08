@@ -74,15 +74,17 @@ class Carousel {
             this.container.addEventListener('transitionend', this.resetInfinite.bind(this))
         }
 
-        this.items.forEach((item, index) => {
-            const image = item.querySelector('.item__image')
+        // Ajout des événements pour ouvrir la modale
+        this.items.forEach((item) => {
+            const image = item.querySelector(".item__image");
             if (image) {
-                image.addEventListener('click', (e) => {
-                    e.stopPropagation() // Empêche le déclenchement d'autres événements de clic
-                    this.openModal(index)
-                })
+                image.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const movieId = image.dataset.id; // Supposons que l'ID du film est stocké en data-id
+                    this.openModal(movieId);
+                });
             }
-        })
+        });
     }
 
 
@@ -208,27 +210,60 @@ class Carousel {
     }
 
 
-    /**
-     * Ouvre la modale avec les informations de l'élément sélectionné.
-     * @param {number} index L'index de l'élément sélectionné dans le carousel.
-     */
-    openModal(index) {
-        const modal = document.querySelector('#modal')
-        const modalImage = modal.querySelector('.modal__image img')
-        const modalTitle = modal.querySelector('.modal__title')
-        const modalDescription = modal.querySelector('.modal__description')
+    async openModal(id) {
+        try {
+            const response = await fetch(`http://localhost:8000/api/v1/titles/${id}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const movie = await response.json();
 
-        const selectedItem = this.element.querySelectorAll('.item')[index]
-        const imageSrc = selectedItem.querySelector('.item__image img').src
-        const title = selectedItem.querySelector('.item__title').textContent
-        const description = selectedItem.querySelector('.item__description').textContent
+            let modal = document.getElementById("modal");
+            let close = document.querySelector(".modal__close");
 
-        modalImage.src = imageSrc
-        modalTitle.textContent = title
-        modalDescription.textContent = description
+            if (!movie) {
+                console.error("Movie data not found.");
+                return;
+            }
 
-        modal.classList.add('modal--visible')
-    }
+            document.getElementById("movie__image").setAttribute("src", movie.image_url || "");
+            document.getElementById("movie__title").innerText = movie.title || "Unknown Title";
+            document.querySelector("#movie__header div .btn").setAttribute(
+                "href",
+                movie.imdb_id ? `https://www.imdb.com/title/${movie.imdb_id}/` : "#"
+            );
+
+            document.getElementById("genre").innerHTML = `<span><b>Genre: </b></span>${movie.genres?.join(', ') || "N/A"}`;
+            document.getElementById("date").innerHTML = `<span><b>Release date: </b></span>${movie.date_published || "Unknown"}`;
+            document.getElementById("rated").innerHTML = `<span><b>Rated: </b></span>${movie.rated || "N/A"}`;
+            document.getElementById("imdb_score").innerHTML = `<span><b>IMDB Score: </b></span>${movie.imdb_score || "N/A"}`;
+            document.getElementById("director").innerHTML = `<span><b>Director: </b></span>${movie.directors?.join(', ') || "Unknown"}`;
+            document.getElementById("actors").innerHTML = `<span><b>Actors: </b></span>${movie.actors?.join(', ') || "Unknown"}`;
+            document.getElementById("duration").innerHTML = `<span><b>Duration: </b></span>${movie.duration ? movie.duration + " min" : "Unknown"}`;
+            document.getElementById("country").innerHTML = `<span><b>Country: </b></span>${movie.countries?.[0] || "Unknown"}`;
+            document.getElementById("box-office").innerHTML = `<span><b>Box Office results: </b></span>${movie.worldwide_gross_income || "N/A"} $`;
+            document.getElementById("description").innerHTML = `<span><b>Description: </b></span>${movie.long_description || "No description available."}`;
+
+            modal.style.display = "block";
+
+            close.onclick = () => (modal.style.display = "none");
+
+            window.onclick = (event) => {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            };
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") {
+                    modal.style.display = "none";
+                }
+            });
+
+        } catch (error) {
+            console.error("Error fetching movie data:", error);
+        }
+    }    
 
 
     /**
@@ -329,8 +364,8 @@ loadResults(bestFilmUrlList, bestFilmUrlFunc);
 let btn = document.querySelector("#bestFilm__buttonInfo");
 btn.onclick = function() {
     loadResults(bestFilmUrl, FilmResultsModale);
-    // Affiche la modale associée au meilleur film (celle-ci possède l'ID "infoModal")
-    infoModal.style.display = "block";
+    // Affiche la modale associée au meilleur film (celle-ci possède l'ID "modal")
+    modal.style.display = "block";
 }
 
 function FilmResultsModale(result){
@@ -341,22 +376,20 @@ function FilmResultsModale(result){
     document.querySelector("#infoModalText__rated").innerHTML = result.rated;
     document.querySelector("#infoModalText__imdbScore").innerHTML = result.imdb_score;
     document.querySelector("#infoModalText__directors").innerHTML = result.directors;
-    document.querySelector("#infoModalText__actors").innerHTML = result.actors;
+
+    // Formate les acteurs en ajoutant une virgule et un espace entre chaque nom
+    let formattedActors = result.actors.join(', ');
+    document.querySelector("#infoModalText__actors").innerHTML = 'Acteurs : ' + formattedActors;
+
     document.querySelector("#infoModalText__duration").innerHTML = result.duration + ' min';
     document.querySelector("#infoModalText__countries").innerHTML = result.countries;
     document.querySelector("#infoModalText__worldwideGrossIncome").innerHTML = result.worldwide_gross_income + ' $';
     document.querySelector("#infoModalText__longDescription").innerHTML = result.long_description;
 }
 
-// Modale du meilleur film (ID "infoModal")
-let infoModal = document.querySelector("#infoModal");
-let span = document.getElementsByClassName("modalContent__close")[0];
-span.onclick = function() {
-    infoModal.style.display = "none";
-}
 window.onclick = function(event) {
-    if (event.target == infoModal) {
-        infoModal.style.display = "none";
+    if (event.target == modal) {
+        modal.style.display = "none";
     }
 }
 
@@ -365,64 +398,55 @@ window.onclick = function(event) {
  *   (Utilise Carousel pour gérer les slides)
  **********************************/
 function makeCategoryCarousel(category) {
-    // Détermine le genre et l'identifiant de la section
     const genre = category !== "Film les mieux notés" ? category : '';
     const idSection = genre ? genre : 'bestFilms';
 
-    // Création de la section de catégorie
     const section = document.createElement('section');
     section.classList.add('category');
     section.id = idSection;
     document.querySelector('#body__blockPage').appendChild(section);
 
-    // Ajout du lien de navigation dans l'en-tête
     const nav = document.createElement('a');
     nav.href = `#${idSection}`;
     nav.textContent = category;
     document.querySelector('#header__navigation').appendChild(nav);
 
-    // Titre de la catégorie
     const h1 = document.createElement('h1');
     h1.textContent = category;
     section.appendChild(h1);
 
-    // Création du conteneur pour le carousel
     const carouselContainer = document.createElement('div');
     carouselContainer.id = `carousel-${idSection}`;
     section.appendChild(carouselContainer);
 
-    // Construction de l'URL pour récupérer les films de la catégorie
     const filmUrlList = genre
         ? `http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score&genre=${genre}`
         : 'http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score';
 
-    // On récupère plusieurs pages afin d'obtenir suffisamment de films
     const urlList = [
         `${filmUrlList}&page=1`,
         `${filmUrlList}&page=2`,
         `${filmUrlList}&page=3`
     ];
 
-    // Récupération des données via l'API
     Promise.all(urlList.map(url => fetch(url).then(response => response.json())))
         .then(pagesData => {
             let films = [];
             pagesData.forEach(page => {
                 films = films.concat(page.results);
             });
-            // On prend les 8 premiers films
             films = films.slice(0, 8);
 
-            // Pour chaque film, on crée un slide avec la structure attendue
             films.forEach(film => {
                 let slide = document.createElement('div');
-                slide.classList.add('item'); // nécessaire pour openModal
+                slide.classList.add('item');
 
                 let imageContainer = document.createElement('div');
                 imageContainer.classList.add('item__image');
                 let img = document.createElement('img');
                 img.src = film.image_url;
                 img.alt = film.original_title;
+                img.dataset.id = film.id; // Assurez-vous que film.id est défini
                 imageContainer.appendChild(img);
 
                 let titleDiv = document.createElement('div');
@@ -442,7 +466,6 @@ function makeCategoryCarousel(category) {
                 carouselContainer.appendChild(slide);
             });
 
-            // Instanciation du Carousel sur le conteneur créé
             new Carousel(carouselContainer, {
                 slidesVisible: 7,
                 slidesToScroll: 1,
