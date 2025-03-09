@@ -107,7 +107,7 @@ Interface élaborée avec les logiciels suivants:
 ### Création de l'environnement virtuel pour l'API   
 
 - Installer une version de **Python** compatible pour votre ordinateur.   
-- Une fois installer ouvrer le cmd (terminal) placer vous dans le dossier principal (dossier racine).   
+- Une fois installer ouvrir le cmd (terminal) placer vous dans le dossier principal (dossier racine).   
 
 **Taper dans votre terminal :**   
 
