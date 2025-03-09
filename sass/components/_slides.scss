@@ -6,12 +6,12 @@
     align-items: center;
     margin-bottom: 30px;
     justify-content: center;
+
     @include mobile-only {
             margin-top: 0px;
     }
 
     .category__prev, .category__next {
-        cursor: pointer;
         -webkit-transition: opacity 0.3s ease;
         -o-transition: opacity 0.3s ease;
         transition: opacity 0.3s ease;
@@ -24,6 +24,8 @@
         text-align: center;
         font-size: 2em;
         padding-top: 40px;
+
+        cursor: pointer;
     }
 
     .category__prev {
@@ -48,6 +50,7 @@
             -webkit-transition: .3s ease-in-out;
             -o-transition: .3s ease-in-out;
             transition: .3s ease-in-out;
+
             @include border-radius($border:$border-radius);
         }
 

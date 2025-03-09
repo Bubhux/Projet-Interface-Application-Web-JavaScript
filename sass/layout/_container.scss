@@ -7,10 +7,11 @@
     padding-bottom: 10px;
     opacity: 0.8;
     font-size: 1em;
+
     @include border-radius($border-radius);
     @include box-shadow($box-shadow);
     @include heading-shadow($colour-white);
-    
+
     .Category__title {
         margin-top: -35px;
         border-bottom-style: solid;

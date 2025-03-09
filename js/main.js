@@ -76,12 +76,16 @@ class Carousel {
 
         // Ajout des événements pour ouvrir la modale
         this.items.forEach((item) => {
-            const image = item.querySelector(".item__image");
+            const image = item.querySelector(".item__image img"); // Sélectionnez l'image directement
             if (image) {
                 image.addEventListener("click", (e) => {
                     e.stopPropagation();
-                    const movieId = image.dataset.id; // Supposons que l'ID du film est stocké en data-id
-                    this.openModal(movieId);
+                    const movieId = image.dataset.id; // Récupérez l'ID du film
+                    if (movieId) {
+                        this.openModal(movieId); // Appelez openModal avec l'ID
+                    } else {
+                        console.error("Movie ID is undefined");
+                    }
                 });
             }
         });
@@ -226,27 +230,54 @@ class Carousel {
                 return;
             }
 
-            document.getElementById("movie__image").setAttribute("src", movie.image_url || "");
-            document.getElementById("movie__title").innerText = movie.title || "Unknown Title";
-            document.querySelector("#movie__header div .btn").setAttribute(
-                "href",
-                movie.imdb_id ? `https://www.imdb.com/title/${movie.imdb_id}/` : "#"
-            );
+            // Fonction pour mettre à jour un élément s'il existe
+            const updateElement = (id, content) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerHTML = content;
+                } else {
+                    console.error(`Element with ID '${id}' not found.`);
+                }
+            };
 
-            document.getElementById("genre").innerHTML = `<span><b>Genre: </b></span>${movie.genres?.join(', ') || "N/A"}`;
-            document.getElementById("date").innerHTML = `<span><b>Release date: </b></span>${movie.date_published || "Unknown"}`;
-            document.getElementById("rated").innerHTML = `<span><b>Rated: </b></span>${movie.rated || "N/A"}`;
-            document.getElementById("imdb_score").innerHTML = `<span><b>IMDB Score: </b></span>${movie.imdb_score || "N/A"}`;
-            document.getElementById("director").innerHTML = `<span><b>Director: </b></span>${movie.directors?.join(', ') || "Unknown"}`;
-            document.getElementById("actors").innerHTML = `<span><b>Actors: </b></span>${movie.actors?.join(', ') || "Unknown"}`;
-            document.getElementById("duration").innerHTML = `<span><b>Duration: </b></span>${movie.duration ? movie.duration + " min" : "Unknown"}`;
-            document.getElementById("country").innerHTML = `<span><b>Country: </b></span>${movie.countries?.[0] || "Unknown"}`;
-            document.getElementById("box-office").innerHTML = `<span><b>Box Office results: </b></span>${movie.worldwide_gross_income || "N/A"} $`;
-            document.getElementById("description").innerHTML = `<span><b>Description: </b></span>${movie.long_description || "No description available."}`;
+            // Mettez à jour les éléments de la modale
+            updateElement("headerModal__filmImage", movie.image_url ? `<img src="${movie.image_url}" alt="Best Film Image" />` : "No image available");
+            updateElement("headerModal__originalTitle", movie.original_title || "Unknown Title");
 
-            modal.style.display = "block";
+            // Mettre à jour le bouton "See on Imdb"
+            const btnElement = document.querySelector("#movie__header div .btn");
+            if (btnElement) {
+                // Si le film a un IMDb ID, on redirige vers la page IMDb du film
+                if (movie.imdb_id) {
+                    btnElement.setAttribute("href", `https://www.imdb.com/title/${movie.imdb_id}/`);
+                } else {
+                    // Si pas d'ID IMDb, redirige simplement vers imdb.com
+                    btnElement.setAttribute("href", "https://www.imdb.com");
+                }
+            }
 
-            close.onclick = () => (modal.style.display = "none");
+            updateElement("infoModalText__genres", movie.genres ? movie.genres.join(', ') : "N/A");
+            updateElement("infoModalText__datePublished", movie.date_published || "Unknown");
+            updateElement("infoModalText__rated", movie.rated || "N/A");
+            updateElement("infoModalText__imdbScore", movie.imdb_score || "N/A");
+            updateElement("infoModalText__directors", movie.directors || "Unknown");
+
+            let formattedActors = Array.isArray(movie.actors) ? movie.actors.join(', ') : "Unknown";
+            updateElement("infoModalText__actors", formattedActors);
+            updateElement("infoModalText__duration", movie.duration ? movie.duration + " min" : "Unknown");
+            updateElement("infoModalText__countries", movie.countries || "Unknown");
+            updateElement("infoModalText__worldwideGrossIncome", movie.worldwide_gross_income ? movie.worldwide_gross_income + " $" : "N/A");
+            updateElement("infoModalText__longDescription", movie.long_description || "No description available.");
+
+            // Affichez la modale
+            if (modal) {
+                modal.style.display = "block";
+            }
+
+            // Fermez la modale
+            if (close) {
+                close.onclick = () => (modal.style.display = "none");
+            }
 
             window.onclick = (event) => {
                 if (event.target === modal) {
@@ -263,7 +294,7 @@ class Carousel {
         } catch (error) {
             console.error("Error fetching movie data:", error);
         }
-    }    
+    }
 
 
     /**
@@ -313,9 +344,6 @@ class Carousel {
 }
 
 
-/**********************************
- *   MODALE DU CAROUSEL (ID "modal")
- **********************************/
 const modal = document.querySelector('#modal')
 if (modal) {
     const modalClose = modal.querySelector('.modal__close')
@@ -332,10 +360,7 @@ if (modal) {
     })
 }
 
-/**********************************
- *       FONCTIONS BEST FILM
- **********************************/
-async function loadResults (url, functionUrl) {
+async function loadResults(url, functionUrl) {
     try {
         const response = await fetch(url);
         const data = await response.json();
@@ -349,11 +374,11 @@ async function loadResults (url, functionUrl) {
 let bestFilmUrlList = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score&page_size=1";
 let bestFilmUrl;
 function bestFilmUrlFunc(result) {
-    bestFilmUrl = result.results[0].url;   
+    bestFilmUrl = result.results[0].url;
     loadResults(bestFilmUrl, bestFilmResultMainPage);
 }
 
-function bestFilmResultMainPage(result){
+function bestFilmResultMainPage(result) {
     document.querySelector("#bestFilm__image").innerHTML = "<img src=" + result.image_url + " alt='Best Film Image' height='250' width='200'/>";
     document.querySelector("#bestFilm__title").innerHTML = result.original_title;
     document.querySelector("#bestFilm__description").innerHTML = result.description;
@@ -362,9 +387,8 @@ function bestFilmResultMainPage(result){
 loadResults(bestFilmUrlList, bestFilmUrlFunc);
 
 let btn = document.querySelector("#bestFilm__buttonInfo");
-btn.onclick = function() {
+btn.onclick = function () {
     loadResults(bestFilmUrl, FilmResultsModale);
-    // Affiche la modale associée au meilleur film (celle-ci possède l'ID "modal")
     modal.style.display = "block";
 }
 
@@ -373,7 +397,7 @@ function FilmResultsModale(result) {
         result.image_url ? `<img src="${result.image_url}" alt="Best Film Image" />` : "No image available";
 
     document.querySelector("#headerModal__originalTitle").innerHTML = result.original_title || "Unknown Title";
-    document.querySelector("#infoModalText__genres").innerHTML = result.genres || "N/A";
+    document.querySelector("#infoModalText__genres").innerHTML = Array.isArray(result.genres) ? result.genres.join(', ') : "N/A";
     document.querySelector("#infoModalText__datePublished").innerHTML = result.date_published || "Unknown";
     document.querySelector("#infoModalText__rated").innerHTML = result.rated || "N/A";
     document.querySelector("#infoModalText__imdbScore").innerHTML = result.imdb_score || "N/A";
@@ -381,7 +405,7 @@ function FilmResultsModale(result) {
 
     // Vérifie si result.actors est défini et est un tableau avant d'appliquer join()
     let formattedActors = Array.isArray(result.actors) ? result.actors.join(', ') : "Unknown";
-    document.querySelector("#infoModalText__actors").innerHTML = 'Acteurs : ' + formattedActors;
+    document.querySelector("#infoModalText__actors").innerHTML = formattedActors;
 
     document.querySelector("#infoModalText__duration").innerHTML = result.duration ? result.duration + " min" : "Unknown";
     document.querySelector("#infoModalText__countries").innerHTML = result.countries || "Unknown";
@@ -392,16 +416,23 @@ function FilmResultsModale(result) {
     document.querySelector("#infoModalText__longDescription").innerHTML = result.long_description || "No description available.";
 }
 
-window.onclick = function(event) {
+// Fonction pour fermer la modale
+function closeModal() {
+    const modal = document.querySelector("#modal");
+    modal.style.display = "none";
+}
+
+// Ajoute un écouteur d'événements au bouton de fermeture
+const closeButton = document.querySelector(".modal__close");
+closeButton.addEventListener("click", closeModal);
+
+// Optionnel : Ferme la modale en cliquant en dehors de la modale
+window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
 }
 
-/**********************************
- *   NOUVELLE FONCTION : makeCategoryCarousel
- *   (Utilise Carousel pour gérer les slides)
- **********************************/
 function makeCategoryCarousel(category) {
     const genre = category !== "Film les mieux notés" ? category : '';
     const idSection = genre ? genre : 'bestFilms';
@@ -451,7 +482,7 @@ function makeCategoryCarousel(category) {
                 let img = document.createElement('img');
                 img.src = film.image_url;
                 img.alt = film.original_title;
-                img.dataset.id = film.id; // Assurez-vous que film.id est défini
+                img.dataset.id = film.id;
                 imageContainer.appendChild(img);
 
                 let titleDiv = document.createElement('div');
@@ -484,9 +515,6 @@ function makeCategoryCarousel(category) {
         });
 }
 
-/**********************************
- *      GÉNÉRATION DES CATÉGORIES
- **********************************/
 const categories = [
     "Film les mieux notés",
     "Romance",
