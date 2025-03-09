@@ -45,23 +45,13 @@
 
 - L'application est exécutée dans une page web.   
 
-<style>
-    .custom-hr {
-        width: 50%;
-        height: 2px;
-        background-color: white;
-        border: none;
-        margin: 20px auto;
-    }
-</style>
-
 <div style="display: flex; justify-content: flex-start; margin: 20px 0;">
     <div style="border: 5px solid #8d8d8d; border-radius: 5px; padding: 10px; padding-bottom: 2px; display: inline-block; margin-right: 10px; margin-left: 20px;">
         <img src="/static/img/screen_1.png" alt="Screen globe" style="width: 1200px; height: auto;">
     </div>
 </div>
 
-<hr class="custom-hr">
+<hr style="width: 50%; height: 2px; background-color: white; border: none; margin: 20px auto;">
 
 <div style="display: flex; justify-content: flex-start; margin: 20px 0;">
     <div style="border: 5px solid #8d8d8d; border-radius: 5px; padding: 10px; padding-bottom: 2px; display: inline-block; margin-right: 10px; margin-left: 20px;">
@@ -69,7 +59,7 @@
     </div>
 </div>
 
-<hr>
+<hr style="width: 50%; height: 2px; background-color: white; border: none; margin: 20px auto;">
 
 <div style="display: flex; justify-content: flex-start; margin: 20px 0;">
     <div style="border: 5px solid #8d8d8d; border-radius: 5px; padding: 10px; padding-bottom: 2px; display: inline-block; margin-right: 10px; margin-left: 20px;">
