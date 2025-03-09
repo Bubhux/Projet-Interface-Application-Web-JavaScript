@@ -2,6 +2,21 @@
 
 class Carousel {
 
+    /**
+    * @callback moveCallbacks
+    * @param {number} [index] 
+    */
+
+    /**
+    * @param {HTMElement} [element]
+    * @param {Object} [options] 
+    * @param {Object} [options.slidesToScroll=1] [Nombre d'éléments à faire défiler]
+    * @param {Object} [options.slidesVisible=1] [Nombre d'éléments visible dans un slide]
+    * @param {boolean} [options.loop=false] [Doit-ton boucler en fin de carousel]
+    * @param {boolean} [options.infinite=false]
+    * @param {boolean} [options.pagination=false]
+    * @param {boolean} [options.navigation=true]
+    */
     constructor(element, options = {}) {
         this.element = element
         this.options = Object.assign({}, {
@@ -76,13 +91,13 @@ class Carousel {
 
         // Ajout des événements pour ouvrir la modale
         this.items.forEach((item) => {
-            const image = item.querySelector(".item__image img"); // Sélectionnez l'image directement
+            const image = item.querySelector(".item__image img");
             if (image) {
                 image.addEventListener("click", (e) => {
                     e.stopPropagation();
-                    const movieId = image.dataset.id; // Récupérez l'ID du film
+                    const movieId = image.dataset.id;
                     if (movieId) {
-                        this.openModal(movieId); // Appelez openModal avec l'ID
+                        this.openModal(movieId);
                     } else {
                         console.error("Movie ID is undefined");
                     }
@@ -90,7 +105,6 @@ class Carousel {
             }
         });
     }
-
 
     /**
      * Applique les bonnes dimensions aux éléments du carousel
@@ -100,7 +114,6 @@ class Carousel {
         this.container.style.width = (ratio * 100) + "%"
         this.items.forEach(item => item.style.width = ((100 / this.slidesVisible) / ratio) + "%")
     }
-
 
     /**
      * Crée les flèches de navigation
@@ -131,7 +144,6 @@ class Carousel {
         })
     }
 
-
     /**
      * Crée la pagination dans le DOM
      */
@@ -155,16 +167,13 @@ class Carousel {
         })
     }
 
-
     next() {
         this.gotoItem(this.currentItem + this.slidesToScroll)
     }
 
-
     prev() {
         this.gotoItem(this.currentItem - this.slidesToScroll)
     }
-
 
     /**
      * Déplace le carousel vers l'élément ciblé
@@ -201,7 +210,6 @@ class Carousel {
         this.moveCallbacks.forEach(cb => cb(index))
     }
 
-
     /**
      * Déplace le container pour donner l'impression d'un slide infini
      */
@@ -213,7 +221,17 @@ class Carousel {
         }
     }
 
-
+    /**
+     * Ouvre une modale et affiche les détails d'un film en fonction de son ID.
+     * La fonction récupère les données du film via une API, met à jour les éléments de la modale,
+     * et gère l'affichage ainsi que la fermeture de la modale.
+     *
+     * @async
+     * @function openModal
+     * @param {string} id - L'identifiant unique du film à afficher.
+     * @returns {Promise<void>} Ne retourne rien explicitement, mais met à jour le DOM pour afficher la modale.
+     * @throws {Error} Si la requête API échoue ou si les données du film ne sont pas valides.
+     */
     async openModal(id) {
         try {
             const response = await fetch(`http://localhost:8000/api/v1/titles/${id}`);
@@ -230,7 +248,14 @@ class Carousel {
                 return;
             }
 
-            // Fonction pour mettre à jour un élément s'il existe
+            /**
+             * Met à jour un élément du DOM avec un contenu donné.
+             * Si l'élément n'existe pas, une erreur est loguée dans la console.
+             *
+             * @function updateElement
+             * @param {string} id - L'ID de l'élément à mettre à jour.
+             * @param {string} content - Le contenu à insérer dans l'élément.
+             */
             const updateElement = (id, content) => {
                 const element = document.getElementById(id);
                 if (element) {
@@ -296,7 +321,6 @@ class Carousel {
         }
     }
 
-
     /**
      * Ajoute une fonction de rappel qui est exécutée à chaque déplacement du carousel.
      * @param {function} cb Callback
@@ -304,7 +328,6 @@ class Carousel {
     onMove(cb) {
         this.moveCallbacks.push(cb)
     }
-
 
     onWindowResize() {
         let mobile = window.innerWidth < 800
@@ -314,7 +337,6 @@ class Carousel {
             this.moveCallbacks.forEach(cb => cb(0))
         }
     }
-
 
     /**
      * Crée un élément div avec une classe donnée.
@@ -392,6 +414,26 @@ btn.onclick = function () {
     modal.style.display = "block";
 }
 
+/**
+ * Met à jour le contenu d'une modale avec les informations d'un film.
+ * Cette fonction prend un objet `result` contenant les détails du film et les affiche dans les éléments HTML correspondants.
+ * Si une propriété est manquante ou non définie, une valeur par défaut est affichée à la place.
+ *
+ * @param {Object} result - Un objet contenant les informations du film.
+ * @param {string} [result.image_url] - L'URL de l'image du film.
+ * @param {string} [result.original_title] - Le titre original du film.
+ * @param {string[]} [result.genres] - Un tableau des genres du film.
+ * @param {string} [result.date_published] - La date de publication du film.
+ * @param {string} [result.rated] - La classification du film (ex: PG-13, R).
+ * @param {number} [result.imdb_score] - Le score IMDb du film.
+ * @param {string} [result.directors] - Les réalisateurs du film.
+ * @param {string[]} [result.actors] - Un tableau des acteurs du film.
+ * @param {number} [result.duration] - La durée du film en minutes.
+ * @param {string} [result.countries] - Les pays d'origine du film.
+ * @param {number} [result.worldwide_gross_income] - Le revenu mondial du film.
+ * @param {string} [result.long_description] - La description longue du film.
+ * @returns {void} Cette fonction ne retourne rien.
+ */
 function FilmResultsModale(result) {
     document.querySelector("#headerModal__filmImage").innerHTML =
         result.image_url ? `<img src="${result.image_url}" alt="Best Film Image" />` : "No image available";
@@ -433,50 +475,72 @@ window.onclick = function (event) {
     }
 }
 
+/**
+ * Crée un carrousel de films pour une catégorie donnée.
+ * La fonction génère une section dans le DOM pour la catégorie, ajoute une navigation,
+ * et charge les films correspondants à partir d'une API. Les films sont ensuite affichés
+ * dans un carrousel interactif.
+ *
+ * @param {string} category - La catégorie de films à afficher. Si la catégorie est "Film les mieux notés",
+ *                            la fonction charge les films les mieux notés. Sinon, elle filtre par genre.
+ * @returns {void} Cette fonction ne retourne rien directement, mais modifie le DOM.
+ */
 function makeCategoryCarousel(category) {
+    // Détermine le genre ou l'identifiant de section en fonction de la catégorie
     const genre = category !== "Film les mieux notés" ? category : '';
     const idSection = genre ? genre : 'bestFilms';
 
+    // Crée une section pour la catégorie et l'ajoute au DOM
     const section = document.createElement('section');
     section.classList.add('category');
     section.id = idSection;
     document.querySelector('#body__blockPage').appendChild(section);
 
+    // Ajoute un lien de navigation pour la catégorie
     const nav = document.createElement('a');
     nav.href = `#${idSection}`;
     nav.textContent = category;
     document.querySelector('#header__navigation').appendChild(nav);
 
+    // Ajoute un titre à la section
     const h1 = document.createElement('h1');
     h1.textContent = category;
     section.appendChild(h1);
 
+    // Crée un conteneur pour le carrousel
     const carouselContainer = document.createElement('div');
     carouselContainer.id = `carousel-${idSection}`;
     section.appendChild(carouselContainer);
 
+    // Détermine l'URL de l'API en fonction du genre
     const filmUrlList = genre
         ? `http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score&genre=${genre}`
         : 'http://localhost:8000/api/v1/titles/?sort_by=-votes,-imdb_score';
 
+    // Liste des URLs pour les pages de résultats
     const urlList = [
         `${filmUrlList}&page=1`,
         `${filmUrlList}&page=2`,
         `${filmUrlList}&page=3`
     ];
 
+    // Charge les données des films à partir de l'API
     Promise.all(urlList.map(url => fetch(url).then(response => response.json())))
         .then(pagesData => {
             let films = [];
+            // Concatène les résultats des trois pages
             pagesData.forEach(page => {
                 films = films.concat(page.results);
             });
+            // Limite le nombre de films à 8
             films = films.slice(0, 8);
 
+            // Crée un slide pour chaque film et l'ajoute au carrousel
             films.forEach(film => {
                 let slide = document.createElement('div');
                 slide.classList.add('item');
 
+                // Conteneur pour l'image du film
                 let imageContainer = document.createElement('div');
                 imageContainer.classList.add('item__image');
                 let img = document.createElement('img');
@@ -485,32 +549,38 @@ function makeCategoryCarousel(category) {
                 img.dataset.id = film.id;
                 imageContainer.appendChild(img);
 
+                // Titre du film (masqué par défaut)
                 let titleDiv = document.createElement('div');
                 titleDiv.classList.add('item__title');
                 titleDiv.style.display = "none";
                 titleDiv.textContent = film.original_title;
 
+                // Description du film (masquée par défaut)
                 let descDiv = document.createElement('div');
                 descDiv.classList.add('item__description');
                 descDiv.style.display = "none";
                 descDiv.textContent = film.description;
 
+                // Ajoute les éléments au slide
                 slide.appendChild(imageContainer);
                 slide.appendChild(titleDiv);
                 slide.appendChild(descDiv);
 
+                // Ajoute le slide au conteneur du carrousel
                 carouselContainer.appendChild(slide);
             });
 
+            // Initialise le carrousel avec les options spécifiées
             new Carousel(carouselContainer, {
                 slidesVisible: 7,
                 slidesToScroll: 1,
                 pagination: true,
                 navigation: true,
-                infinite: true
+                infinite: true,
             });
         })
         .catch(err => {
+            // Gère les erreurs de chargement des films
             console.error("Erreur lors du chargement des films pour la catégorie", category, err);
         });
 }
